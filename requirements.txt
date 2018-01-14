@@ -1,0 +1,8 @@
+argparse
+munch
+requests
+tabulate
+tqdm
+xmltodict
+pytimeparse # for parsing time intervals
+pyyaml
