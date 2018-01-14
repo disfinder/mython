@@ -64,28 +64,22 @@ def main(args):
     return args
 
 
-if __name__ == '__main__':
-    args = parse_args()
-    log.basicConfig(level=args.log_level)
+def configure_logging(args):
+    # TODO: implement separated thidrparty logging
     sh = TqdmHandler()
     sh.setLevel(args.log_level)
     formatter = log.Formatter('%(asctime)s - %(levelname)8s - %(name)s - %(message)s')
     sh.setFormatter(formatter)
-
     root = log.getLogger()
     root.addHandler(sh)
+    root.setLevel(args.log_level)
 
-    if args.verbose >= 3:  # include shade debug in log. actually, not only the shade but any inherited from root
-        root.setLevel(args.log_level)
-    else:
-        root.setLevel(log.CRITICAL)
-    my_logger = log.getLogger('NAME')
-    my_logger.addHandler(sh)
 
-    my_logger.setLevel(args.log_level)
-    my_logger.propagate = False
-
-    log = my_logger.getChild(__name__)
+if __name__ == '__main__':
+    args = parse_args()
+    configure_logging(args)
+    log.info('Logging configured.')
+    log.debug('Args: {}'.format(args))
 
     try:
         result = main(args)
