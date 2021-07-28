@@ -4,6 +4,9 @@
 """
     Created by Dis Finder on 2021-07-28
     Script to remove non-uniq lines from customized bash history
+
+    usage:
+    cat ~/.bash_history | PYTHONPATH=${PYTHONPATH}:.. ./scripts/shrink-bash-history.py  -vv
 """
 
 from lib.common import tools, prologging, config, parameters
